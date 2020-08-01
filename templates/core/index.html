@@ -1,0 +1,30 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load custom_tags %}
+{% block content %}
+
+{% if results %}
+
+{% for result in results %}
+
+  <div class="card shadow p-3 mb-5 bg-white rounded">
+    <img height="300px" width="25%" src="{% with result.item_image as image_static %} {% static image_static %} {% endwith %}" alt="Card image cap">
+    <div class="card-body">
+      <a href="{% url 'items:view_item_details' result.id %}"><h5 class="card-title">{{result.item_name}}</h5></a>
+      <p class="card-text">{{result.item_description}}</p>
+      <p class="card-text"><small class="text-muted">{{result.item_discount}} % off</small></p>
+      {% if result.id in final_item_status %}
+      <p class="card-text">Already in cart!</p>
+      {% else %}
+      <form action="{% url 'cart:add_item' result.id%}">
+        <button class="btn btn-primary">Add to cart</button>
+      </form>
+      {% endif %}
+    </div>
+    </div>
+
+{% endfor %}
+{% else %}
+<h1>Your search didn't return anything!</h1>
+{% endif %}
+{% endblock %}

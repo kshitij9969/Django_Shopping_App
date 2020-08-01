@@ -1,0 +1,19 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load custom_tags%}
+{% block content %}
+
+  <div class="card shadow p-3 mb-5 bg-white rounded">
+        <img height="400px" width="40%" src="{% with item.item_image as image_static %} {% static image_static %} {% endwith %}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{item.item_name}}</h5>
+          <p class="card-text">{{item.item_description}}</p>
+          <p class="card-text"><small class="text-muted">{{item.item_discount}} % off</small></p>
+            <h1>Price: {{item.item_price}}</h1>
+            <h1>Item discount: {{item.item_discount}}% Off!</h1>
+            <h1>You pay:
+                {% final_price item.item_price item.item_discount%}
+            </h1>
+        </div>
+    </div>
+{% endblock %}

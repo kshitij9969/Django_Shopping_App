@@ -1,0 +1,8 @@
+{% extends 'core/base.html' %}
+{% block content %}
+
+<h1>Placing order?</h1>
+<form action="{% url 'cart:payments' %}">
+<button class="btn btn-primary">Place order</button>
+</form>
+{% endblock %}
